@@ -6,9 +6,9 @@ import seaborn as sns
 
 
 if __name__ == '__main__':
-    htb = HierarchicalTokenBucket(100, 100, 2)
+    htb = HierarchicalTokenBucket(100, 50, 2)
 
-    traffic = list(zip(np.arange(0, 10_000, 100), np.random.poisson(3, 100), np.random.poisson(5, 100)))  # tier-1: 50 TPS, tier-2: 100 TPS * 10 seconds
+    traffic = list(zip(np.arange(0, 10_000, 100), np.random.poisson(3, 100), np.random.poisson(5, 100)))  # tier-1: 30 TPS, tier-2: 50 TPS over 10 seconds
 
     throttle = np.array([(ticker, tier_1_request, tier_2_request, *htb.acquire(ticker, [tier_1_request, tier_2_request])) for (ticker, tier_1_request, tier_2_request) in traffic])
 

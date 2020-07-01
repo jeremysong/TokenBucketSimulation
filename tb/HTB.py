@@ -6,7 +6,7 @@ from tb.TokenBucket import TokenBucket
 class HierarchicalTokenBucket:
     def __init__(self, capacity, refill_rate, num_tbs):
         self._capacity = capacity // num_tbs  # make sure capacity is an integer
-        self._refill_rate = refill_rate // num_tbs  # make sure capacity is an integer
+        self._refill_rate = refill_rate
         self._token_buckets = list([TokenBucket(self._capacity, self._refill_rate, f"{i}") for i in range(0, num_tbs)])
 
     def refill(self, ticker):
